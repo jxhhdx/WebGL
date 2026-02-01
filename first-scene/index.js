@@ -1,11 +1,14 @@
 import * as THREE from "three";
+import {
+    OrbitControls
+} from 'three/addons/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
 
 {
   const geometry = new THREE.BoxGeometry(100, 100, 100);
-  const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color("orange"),
+  const material = new THREE.MeshLambertMaterial({
+    color: new THREE.Color("pink"),
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(0, 0, 0);
@@ -19,6 +22,11 @@ const scene = new THREE.Scene();
 }
 
 {
+  const axisHelper = new THREE.AxesHelper(200);
+  scene.add(axisHelper);
+}
+
+{
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -29,7 +37,15 @@ const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height)
 
-    renderer.render(scene, camera);
+    function render() {
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    }
+
+    render();
 
     document.body.append(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+
 }
