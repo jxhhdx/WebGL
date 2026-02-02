@@ -29,11 +29,8 @@ function onChange() {
     camera2.updateProjectionMatrix();
     camera2Helper.update();
 }
-gui.add(camera2, 'fov', [30, 60, 10]).onChange(onChange);
-gui.add(camera2, 'aspect', {
-    '16/9': 16/9,
-    '4/3': 4/3
-}).onChange(onChange);
+gui.add(camera2, 'fov', 10, 60).onChange(onChange);
+gui.add(camera2, 'aspect', 0.1, 3).onChange(onChange);
 gui.add(camera2, 'near', 0, 300).onChange(onChange);
 gui.add(camera2, 'far', 300, 800).onChange(onChange);
 
